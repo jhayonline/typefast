@@ -66,3 +66,16 @@ void WordBank::loadFromFile(const std::string &filename) {
   }
   std::cout << "Loaded " << words.size() << " words from file" << std::endl;
 }
+
+std::string WordBank::generateSentence(int wordCount) {
+  std::uniform_real_distribution<> dist(0, words.size() - 1);
+  std::stringstream ss;
+
+  for (int i = 0; i < wordCount; ++i) {
+    if (i > 0)
+      ss << " ";
+    ss << words[dist(rng)];
+  }
+
+  return ss.str();
+}
