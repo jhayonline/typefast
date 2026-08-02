@@ -51,3 +51,18 @@ void WordBank::loadDefaults() {
            "design",     "despite",    "determine", "develop",    "development",
            "difference", "different",  "direction", "director"};
 }
+
+void WordBank::loadFromFile(const std::string &filename) {
+  std::ifstream file(filename);
+  if (!file.is_open())
+    return;
+
+  std::string word;
+  words.clear();
+  while (file >> word) {
+    if (!word.empty() && word.length() > 1) {
+      words.push_back(word);
+    }
+  }
+  std::cout << "Loaded " << words.size() << " words from file" << std::endl;
+}
